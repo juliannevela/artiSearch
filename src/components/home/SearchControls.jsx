@@ -27,6 +27,13 @@ function SearchControls() {
             <option value="releases">Albums</option>
             <option value="title">Songs</option>
           </select>
+          <p>Results per page: </p>
+          <select name="perPage" id="per-page">
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+
           <button type="submit">Search</button>
         </form>
       </section>
