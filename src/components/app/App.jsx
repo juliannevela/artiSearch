@@ -5,6 +5,7 @@ import ArtistPage from '../../containers/ArtistPage';
 import AlbumPage from '../../containers/AlbumPage';
 import SongLyrics from '../../containers/SongLyrics';
 import Header from './Header';
+import '../styles/main.css';
 
 export default function App() {
   return (

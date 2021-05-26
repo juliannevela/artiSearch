@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+div#root {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.mainContainer {
+  height: 100vh;
+  border: 3px solid red;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5px 5px;
+  grid-template-areas: 'Search-Controls Artist-List Artist-List';
+}
+
+.searchControls {
+  border: 3px solid blue;
+  grid-area: Search-Controls;
+}
+
+.artistList {
+  border: 3px solid green;
+  grid-area: Artist-List;
+}
