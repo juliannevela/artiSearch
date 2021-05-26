@@ -10,6 +10,12 @@ div#root {
   padding: 0;
 }
 
+ul,
+ol,
+li {
+  list-style: none;
+}
+
 .mainContainer {
   height: 100vh;
   border: 3px solid red;
