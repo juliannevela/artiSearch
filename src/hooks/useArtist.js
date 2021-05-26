@@ -8,6 +8,7 @@ const useArtist = () => {
   const [limit, setLimit] = useState(25);
   const [currentPage, setCurrentPage] = useState(1);
   const [filter, setFilter] = useState('artist');
+  const [totalPages, setTotalPages] = useState();
 
   const handleQueryChange = ({ target }) => {
     setQuery(target.value);
@@ -30,8 +31,14 @@ const useArtist = () => {
   };
 
   const handleArtistsFetch = () => {
-    const artists = fetchArtists(currentPage, query, limit, filter);
-    setArtists(artists);
+    const { artistArray, count } = 
+    fetchArtists(currentPage, query, limit, filter);
+    handleTotalPages(count, limit);
+    setArtists(artistArray);
+  };
+
+  const handleTotalPages = (count, limit) => {
+    setTotalPages(Math.ceil(count / limit));
   };
 
   const handleSubmit = (e) => {
@@ -43,7 +50,7 @@ const useArtist = () => {
     setLoading(true);
     handleArtistsFetch();
     setLoading(false);
-  }, [currentPage]);
+  }, []);
 
   return {
     loading,
@@ -51,11 +58,13 @@ const useArtist = () => {
     query,
     limit,
     currentPage,
+    totalPages,
     handleSubmit,
     handleFilterChange,
     handleQueryChange,
     handleLimitChange,
     handlePageChange,
+    handleTotalPages
   };
 };
 
