@@ -31,11 +31,12 @@ const useArtist = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    handleArtistsFetch();
   };
 
   useEffect(() => {
     setLoading(true);
-
+    handleArtistsFetch();
     setLoading(false);
   }, [currentPage]);
 
@@ -45,6 +46,8 @@ const useArtist = () => {
     query,
     limit,
     currentPage,
+    handleSubmit,
+    handleFilterChange,
     handleQueryChange,
     handleLimitChange,
     handleCurrentPageChange,
