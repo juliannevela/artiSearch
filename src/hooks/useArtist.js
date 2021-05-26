@@ -20,8 +20,13 @@ const useArtist = () => {
   const handleLimitChange = ({ target }) => {
     setLimit(target.value);
   };
-  const handleCurrentPageChange = ({ target }) => {
-    setCurrentPage(target.value);
+
+  const handlePageChange = ({ target }) => {
+    if(target.value === 'next') {
+      return setCurrentPage(currentPage + 1);
+    } else {
+      return setCurrentPage(currentPage - 1);
+    }
   };
 
   const handleArtistsFetch = () => {
@@ -50,7 +55,7 @@ const useArtist = () => {
     handleFilterChange,
     handleQueryChange,
     handleLimitChange,
-    handleCurrentPageChange,
+    handlePageChange,
   };
 };
 
