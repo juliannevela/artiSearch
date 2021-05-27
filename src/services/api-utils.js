@@ -63,7 +63,5 @@ export const fetchSongs = async (albumId) => {
 export const fetchLyrics = async (artist, songTitle) => {
   const res = await fetch(`https://api.lyrics.ovh/v1/${artist}/${songTitle}`);
 
-  const json = await res.json();
-
-  return JSON.parse(json);
+  return res.json();
 };
