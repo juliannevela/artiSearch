@@ -10,8 +10,10 @@ function ArtistList({ artistArray, loading }) {
     <ul>
       {artistArray.map((artist) => (
         <li className={style.artistCard} key={artist.id}>
-          <p>Artist Name</p>
-          <p>Tags</p>
+          <p>Name: ${artist.name}</p>
+          <p>
+            Genres: {artist.tags ? artist.tags : 'Does not ascribe to labels.'}
+          </p>
         </li>
       ))}
     </ul>
