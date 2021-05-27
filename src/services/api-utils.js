@@ -51,8 +51,9 @@ export const fetchSongs = async (albumId) => {
   const res = await fetch(
     `http://musicbrainz.org/ws/2/recording?release=${albumId}&fmt=json`
   );
-  const { recordings } = await res.json();
-  const recordingCount = await res.json()['recording-count'];
+  const json = await res.json();
+  const { recordings } = json;
+  const recordingCount = json['recording-count'];
   return {
     recordings,
     recordingCount,

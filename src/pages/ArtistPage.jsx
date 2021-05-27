@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Loading from '../components/app/Loading';
 import { fetchReleases } from '../services/api-utils';
 import style from '../components/styles/album.css';
@@ -26,7 +25,7 @@ function Artist() {
         <ul className={style.albums}>
           {releaseList.map((release) => (
             <Link
-              to={`/albums/${release.albumTitle}/${release.albumId}`}
+              to={`/albums/${release.albumTitle}/${release.albumId}?artist=${name}&cover=${release.coverArt}`}
               key={`${release.albumId}`}
             >
               <li className={style.albumCard}>
