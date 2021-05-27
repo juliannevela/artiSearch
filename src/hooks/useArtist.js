@@ -23,7 +23,7 @@ const useArtist = () => {
   };
 
   const handlePageChange = ({ target }) => {
-    if(target.value === 'next') {
+    if (target.value === 'next') {
       return setCurrentPage(currentPage + 1);
     } else {
       return setCurrentPage(currentPage - 1);
@@ -31,13 +31,15 @@ const useArtist = () => {
   };
 
   const handleArtistsFetch = async () => {
-    const { artistResults, count } = 
-    await fetchArtists(currentPage, query, limit, filter);
+    const { artistResults, count } = await fetchArtists(
+      currentPage,
+      query,
+      limit,
+      filter
+    );
     handleTotalPages(count, limit);
     setArtistArray(artistResults);
-    console.log(artistResults, 'hook');
   };
-  console.log(artistArray, 'hi');
   const handleTotalPages = (count, limit) => {
     setTotalPages(Math.ceil(count / limit));
   };
@@ -48,7 +50,6 @@ const useArtist = () => {
     await handleArtistsFetch();
     setLoading(false);
   };
-
 
   const artistUtils = {
     loading,
@@ -62,7 +63,7 @@ const useArtist = () => {
     handleQueryChange,
     handleLimitChange,
     handlePageChange,
-    handleTotalPages
+    handleTotalPages,
   };
 
   return artistUtils;
