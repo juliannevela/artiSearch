@@ -10,7 +10,10 @@ function ArtistList({ artistArray, loading }) {
   ) : (
     <ul>
       {artistArray.map((artist) => (
-        <Link to={`/${artist.name}/${artist.artistId}`} key={artist.artistId}>
+        <Link
+          to={`artists/${artist.name}/${artist.artistId}`}
+          key={artist.artistId}
+        >
           <li className={style.artistCard}>
             <p>Name: {artist.name}</p>
             <p>

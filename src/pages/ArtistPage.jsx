@@ -25,7 +25,10 @@ function Artist() {
       <section>
         <ul className={style.albums}>
           {releaseList.map((release) => (
-            <Link to={`/album/${release.albumId}`} key={`${release.albumId}`}>
+            <Link
+              to={`/albums/${release.albumTitle}/${release.albumId}`}
+              key={`${release.albumId}`}
+            >
               <li className={style.albumCard}>
                 <img
                   src={
