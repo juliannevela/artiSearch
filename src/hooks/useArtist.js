@@ -6,7 +6,7 @@ const useArtist = () => {
   const [artistArray, setArtistArray] = useState([]);
   const [query, setQuery] = useState('');
   const [limit, setLimit] = useState(25);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   const [filter, setFilter] = useState('artist');
   const [totalPages, setTotalPages] = useState();
 

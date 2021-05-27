@@ -10,13 +10,15 @@ export const fetchArtists = async (currentPage, query, limit = 25, filter) => {
   const artistResults = artists.map((artist) => ({
     artistId: artist.id,
     name: artist.name,
-    tags: artist.tags?.sort((a, b) => {
-      return a.count - b.count;
-    })
+    tags: artist.tags
+      ?.sort((a, b) => {
+        return a.count - b.count;
+      })
       .slice(0, 2),
   }));
   return {
-    artistResults, count
+    artistResults,
+    count,
   };
 };
 
@@ -25,8 +27,12 @@ export const fetchReleases = async (id) => {
   const res =
     await fetch(`http://musicbrainz.org/ws/2/release?artist=${id}&fmt=json
     `);
-  const releaseCount = await res.json()['releases-count']; 
-  const { releases } = await res.json();
+
+  const json = await res.json();
+
+  const { releases } = json;
+  const releaseCount = json['releases-count'];
+
   const releaseArray = releases.map((release) => ({
     albumId: release.id,
     albumTitle: release.title,
@@ -36,7 +42,8 @@ export const fetchReleases = async (id) => {
   }));
 
   return {
-    releaseArray, releaseCount
+    releaseArray,
+    releaseCount,
   };
 };
 
@@ -47,7 +54,8 @@ export const fetchSongs = async (albumId) => {
   const { recordings } = await res.json();
   const recordingCount = await res.json()['recording-count'];
   return {
-    recordings, recordingCount
+    recordings,
+    recordingCount,
   };
 };
 
