@@ -1,22 +1,22 @@
+/* eslint-disable indent */
 /* eslint-disable max-len */
 
-export const fetchArtists = async (limit = 25, page, query) => {
-  const offset = page * limit;
+export const fetchArtists = async (currentPage, query, limit = 25, filter) => {
+  const offset = currentPage * limit;
   const res = await fetch(
-    `http://musicbrainz.org/ws/2/artist?query=${query}&fmt=json&limit=${limit}&offset=${offset}`
+    `http://musicbrainz.org/ws/2/${filter}?query=${query}&fmt=json&limit=${limit}&offset=${offset}`
   );
-  const { artists, count } = res.json();
-  const artistArray = artists.map((artist) => ({
+  const { artists, count } = await res.json();
+  const artistResults = artists.map((artist) => ({
     artistId: artist.id,
     name: artist.name,
-    tags: artist.tags
-      .sort((a, b) => {
-        return a.count - b.count;
-      })
+    tags: artist.tags?.sort((a, b) => {
+      return a.count - b.count;
+    })
       .slice(0, 2),
   }));
   return {
-    artistArray, count
+    artistResults, count
   };
 };
 
@@ -25,8 +25,8 @@ export const fetchReleases = async (id) => {
   const res =
     await fetch(`http://musicbrainz.org/ws/2/release?artist=${id}&fmt=json
     `);
-  const releaseCount = res.json()['releases-count']; 
-  const { releases } = res.json();
+  const releaseCount = await res.json()['releases-count']; 
+  const { releases } = await res.json();
   const releaseArray = releases.map((release) => ({
     albumId: release.id,
     albumTitle: release.title,
@@ -44,8 +44,8 @@ export const fetchSongs = async (albumId) => {
   const res = await fetch(
     `http://musicbrainz.org/ws/2/recording?release=${albumId}&fmt=json`
   );
-  const { recordings } = res.json();
-  const recordingCount = res.json()['recording-count'];
+  const { recordings } = await res.json();
+  const recordingCount = await res.json()['recording-count'];
   return {
     recordings, recordingCount
   };

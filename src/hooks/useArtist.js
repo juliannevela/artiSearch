@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { fetchArtists } from '../services/api-utils';
 
 const useArtist = () => {
   const [loading, setLoading] = useState(false);
-  const [artists, setArtists] = useState([]);
+  const [artistArray, setArtistArray] = useState([]);
   const [query, setQuery] = useState('');
   const [limit, setLimit] = useState(25);
   const [currentPage, setCurrentPage] = useState(1);
@@ -30,31 +30,29 @@ const useArtist = () => {
     }
   };
 
-  const handleArtistsFetch = () => {
-    const { artistArray, count } = 
-    fetchArtists(currentPage, query, limit, filter);
+  const handleArtistsFetch = async () => {
+    const { artistResults, count } = 
+    await fetchArtists(currentPage, query, limit, filter);
     handleTotalPages(count, limit);
-    setArtists(artistArray);
+    setArtistArray(artistResults);
+    console.log(artistResults, 'hook');
   };
-
+  console.log(artistArray, 'hi');
   const handleTotalPages = (count, limit) => {
     setTotalPages(Math.ceil(count / limit));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    handleArtistsFetch();
+    setLoading(true);
+    await handleArtistsFetch();
+    setLoading(false);
   };
 
-  useEffect(() => {
-    setLoading(true);
-    handleArtistsFetch();
-    setLoading(false);
-  }, []);
 
-  return {
+  const artistUtils = {
     loading,
-    artists,
+    artistArray,
     query,
     limit,
     currentPage,
@@ -66,6 +64,8 @@ const useArtist = () => {
     handlePageChange,
     handleTotalPages
   };
+
+  return artistUtils;
 };
 
 export default useArtist;

@@ -1,12 +1,10 @@
 /* eslint-disable max-len */
 import React from 'react';
-import useArtist from '../../hooks/useArtist';
+import PropTypes from 'prop-types';
 import style from '../styles/search.css';
 
-function SearchControls() {
-  const { query, currentPage, handleQueryChange, handleFilterChange, handleLimitChange, handlePageChange, handleSubmit } = useArtist();
-
-
+function SearchControls({ query, currentPage, handleQueryChange, handleFilterChange, handleLimitChange, handlePageChange, handleSubmit }) {
+  
   return (
     <>
       <section className={style.search}>

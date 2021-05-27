@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import HomePage from '../../containers/HomePage';
-import ArtistPage from '../../containers/ArtistPage';
-import AlbumPage from '../../containers/AlbumPage';
-import SongLyrics from '../../containers/SongLyrics';
+import HomePage from '../../pages/HomePage';
+import ArtistPage from '../../pages/ArtistPage';
+import AlbumPage from '../../pages/AlbumPage';
+import SongLyrics from '../../pages/SongLyrics';
 import Header from './Header';
 import '../styles/main.css';
 
